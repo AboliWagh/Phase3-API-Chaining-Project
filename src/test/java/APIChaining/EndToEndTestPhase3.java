@@ -42,7 +42,8 @@ public class EndToEndTestPhase3 {
 		// NEW GET Method
 		response = NewGetMethod(EmpId);
 		Assert.assertEquals(response.getStatusCode(), 400);
-
+		Jpath = response.jsonPath();
+		Assert.assertEquals(Jpath.get("message"), "Entity Not Found");
 	}
 
 ////All the Methods for API Chaining ////
@@ -112,9 +113,7 @@ public class EndToEndTestPhase3 {
 	public Response NewGetMethod(int EmpId) {
 
 		RestAssured.baseURI = BaseURI;
-
 		RequestSpecification request = RestAssured.given();
-
 		Response response = request.get("/" + EmpId);
 
 		return response;
